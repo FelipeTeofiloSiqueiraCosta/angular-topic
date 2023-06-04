@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background-light text-text-light transition-all dark:bg-background-dark dark:text-text-dark;
+  }
+  summary {
+    list-style-type: none; /* Firefox */
+  }
+
+  summary::-webkit-details-marker {
+    display: none; /* Chrome */
+  }
+  html,
+  body {
+    height: 100vh;
+  }
+}
+
+@layer utilities {
+  dark {
+    @apply transition-all;
+  }
+}
+
+@layer components {
+  .sidebarActive {
+    @apply absolute -left-96;
+  }
+  .sidebarInactive {
+    @apply relative left-0;
+  }
+  .summaryNav {
+    @apply flex cursor-pointer items-center justify-between border-b-[1px] border-[#000] font-light text-title-light dark:border-[#fff] dark:text-title-dark;
+  }
+  .detailsNav {
+    @apply transition-all;
+  }
+  .detailsNav > .summaryNav i {
+    @apply origin-center rotate-0 transition-all;
+  }
+  .detailsNav[open] > .summaryNav i {
+    @apply origin-center rotate-90 transition-all;
+  }
+  .contentSummary {
+    @apply ms-4 flex flex-col  p-1 transition-all dark:border-[white];
+  }
+  .contentSummary .subTopic {
+    @apply mb-1 text-lg font-light text-text-light hover:font-normal dark:text-text-dark;
+  }
+  .contentSummary .subTopic + .subTopic {
+    @apply border-t-[1px];
+  }
+}
