@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { User } from '../interfaces/user';
+import { User } from '../interfaces/User';
 import { clientQl } from '../graphql-client';
 import { gql } from 'graphql-request';
 
