@@ -2,17 +2,18 @@
   <aside
     class="border-black {{
       shared.sidebarActived ? 'sidebarInactive' : 'sidebarActive'
-    }} h-full w-[150px] overflow-hidden overflow-y-auto border-r-2 bg-background-light p-2 font-['Roboto'] transition-all duration-500 dark:bg-background-dark md:w-1/4"
+    }} h-full w-[150px] overflow-hidden overflow-y-auto  font-['Roboto'] transition-all duration-500  md:w-1/4"
   >
     <h1
-      class="text-center text-[2rem] font-bold text-title-light dark:text-title-dark"
+      class="gradient-text py-4 text-center font-['Alfa_Slab_One'] text-2xl font-bold text-title-light dark:text-title-dark sm:text-4xl"
     >
       Tópic
     </h1>
     <app-navbar></app-navbar>
   </aside>
-  <main class="flex-1 p-4">
+  <main class="flex-1 {{ shared.sidebarActived ? 'p-4' : 'py-16 ps-14 pr-4' }}">
     <app-configuration></app-configuration>
+
     <router-outlet></router-outlet>
   </main>
 </div>

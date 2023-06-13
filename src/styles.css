@@ -68,16 +68,29 @@
   }
 
   .sidebarActive {
-    @apply absolute -left-96;
+    @apply absolute -left-0;
   }
   .sidebarInactive {
     @apply relative left-0;
   }
   .summaryNav {
-    @apply flex cursor-pointer items-center justify-between border-b-[1px] border-[#000] font-light text-title-light dark:border-[#fff] dark:text-title-dark;
+    @apply flex w-full cursor-pointer px-4 py-1 font-light text-title-light transition-all sm:py-3;
+    clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0% 100%, 3% 49%, 0% 0%);
+    background-image: linear-gradient(
+      to right,
+      rgb(96 165 250) 10%,
+      rgb(232 121 249) 100%
+    );
+  }
+  html.dark .summaryNav {
+    background-image: linear-gradient(
+      to right,
+      rgb(232 121 249) 10%,
+      #6466f1 100%
+    );
   }
   .detailsNav {
-    @apply transition-all;
+    @apply relative -left-3/4 transition-all hover:left-0;
   }
   .detailsNav > .summaryNav i {
     @apply origin-center rotate-0 transition-all;
@@ -85,8 +98,11 @@
   .detailsNav[open] > .summaryNav i {
     @apply origin-center rotate-90 transition-all;
   }
+  .detailsNav[open] {
+    @apply left-0;
+  }
   .contentSummary {
-    @apply ms-4 flex flex-col  p-1 transition-all dark:border-[white];
+    @apply relative ms-4 flex  flex-col overflow-x-hidden p-1 transition-all dark:border-[white];
   }
   .contentSummary .subTopic {
     @apply mb-1 text-lg font-light text-text-light hover:font-normal dark:text-text-dark;
