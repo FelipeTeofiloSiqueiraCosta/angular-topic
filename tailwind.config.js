@@ -11,6 +11,9 @@ module.exports = {
 
       "text-light": "#000",
       "text-dark": "#E5E7EB",
+      "orange-300": "rgb(253 186 116)",
+      "fuchsia-400": "rgb(232 121 249)",
+      "blue-300": "rgb(96 165 250)",
     },
     fontFamily: {
       sans: ["Bubbler One", "Roboto", "Arial", "sans-serif"],

@@ -4,6 +4,8 @@ import { User } from '../interfaces/User';
 import { clientQl } from '../graphql-client';
 import { gql } from 'graphql-request';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,11 +15,11 @@ export class AuthService {
   constructor() {}
 
   haveSession() {
-    const encoded = localStorage.getItem('@topic:auth');
+    const encoded = localStorage.getItem(environment.localStorage_name_session);
 
     if (encoded) {
       const decoded: User = JSON.parse(atob(encoded));
-      console.log(decoded);
+
       if (
         decoded.hasOwnProperty('expiresAt') &&
         decoded.expiresAt > new Date().getTime()
@@ -25,10 +27,22 @@ export class AuthService {
         this.userLoggedStatus = true;
       } else {
         this.userLoggedStatus = false;
+        localStorage.removeItem(environment.localStorage_name_session);
       }
     }
 
     return this.userLoggedStatus;
+  }
+
+  async createNewUser(user: User, file: { fileName: string; handle: string }) {
+    const encodedPassword = btoa(user.password || '');
+    const query = gql`
+      mutation CreateOwner {
+        createOwner(
+          data: { name: "${user.name}", email: "${user.email}", password: "${encodedPassword}", picture: {create: {fileName: "${file.fileName}", handle: "${file.handle}"}}, birthday: "${user.birthday}" }
+        )
+      }
+    `;
   }
 
   async signIn(email: string, password: string) {
@@ -62,7 +76,7 @@ export class AuthService {
 
   setSession(user: User): string {
     const object = btoa(JSON.stringify(user));
-    localStorage.setItem('@topic:auth', object);
+    localStorage.setItem(environment.localStorage_name_session, object);
     return object;
   }
   getSession() {}

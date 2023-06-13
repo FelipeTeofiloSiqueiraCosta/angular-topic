@@ -6,4 +6,5 @@ export interface User {
   permissionToken?: string;
   password?: string;
   expiresAt: number;
+  birthday: string;
 }

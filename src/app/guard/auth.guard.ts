@@ -28,7 +28,8 @@ export class AuthGuard implements CanActivate {
     if (isAuthenticated) {
       return true;
     } else {
-      return this.router.parseUrl('/initial');
+      return true;
+      // return this.router.parseUrl('/initial');
     }
   }
 }
